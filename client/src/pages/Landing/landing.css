@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+.container{
+
+    background: url("../../images/landing.png");
+    background-color: rgb(191, 214, 216);
+    display: flex;
+    /*justify-content: center;
+    align-items: flex-end;*/
+   
+    
+    height: 100vh;
+    
+       
+
+}
+
+.title{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+}
+
+.btnWrapper{
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+   
+    
+}
+
+/*btn style*/
+.btnEnter {
+    
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 1em 2em;
+    font-family: 'Caveat', cursive;
+    border-radius: 0.6em;
+    margin-bottom: 2%;
+    margin-left: 45%;
+    position: absolute;
+    bottom: 0;
+    border-color:#3498db;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+
+    /*bajamos la velocidad de la transicion*/
+    transition: all 150ms ease-in-out;
+   
+}
+/*transicionamos el box-shadow*/
+.btnEnter:hover {
+    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+    color: #3498db;
+}
+
+
+/*h1*/
+h1{
+    color: rgb(39, 37, 37);
+    margin-left: 40%;
+    font-family: 'Caveat', cursive;
+    font-size: 5rem;
+    
+
+}
