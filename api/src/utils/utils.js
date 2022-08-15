@@ -62,10 +62,10 @@ const getCountryByName = async (name) => {
                             [Op.iLike]: `%${name}%`,
                             [Op.startsWith]: `%${name}%`,
                         }
-                    }
+                    }    
                 }
             })
-
+            
             if (!filtered) {
                 throw new Error("Country not found");
             }
