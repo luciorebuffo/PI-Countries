@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:3001/";
 
 //Pedimos todos los paises al back
-export const getcountries = () => {
+export const getCountries = () => {
 
     return async (dispatch) => {
 

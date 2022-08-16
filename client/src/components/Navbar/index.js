@@ -5,7 +5,7 @@ import "./navbar.css";
 
 function Navbar(){
     return (
-        <div class = "Nav">
+        <div className = "Nav">
             <NavLink className = "NavLink" to = "/">HenryCountries</NavLink>
             <NavLink className = "NavLink" to = "/countries">Countries</NavLink>
             <NavLink className = "NavLink" to = "/activity/create">Create Activity</NavLink>
