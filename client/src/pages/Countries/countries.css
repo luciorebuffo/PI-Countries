@@ -1,11 +1,13 @@
-.countriesContainer{
-    background: #9CECFB;  
-    background: -webkit-linear-gradient(to right, #3266bb, #65C7F7, #9CECFB);  
-    background: linear-gradient(to right, #3266bb, #65C7F7, #9CECFB);
-    
-    
+body{
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url("../../images/travelBack.jpg");  
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 
     
+}
+
+
+.countriesContainer{
     width: auto;
     min-height: 100vh;
 }

@@ -4,28 +4,28 @@ import "./pagination.css";
 function Pagination({currentPage, allCountries, paginado}){
 
     const pageNumbers = [];
-    //Voy a recorrer un arreglo en el que voy a dividir todas las recetas
+    //Voy a recorrer un arreglo en el que voy a dividir todos los paises
     // por paginado así creo varias paginas.
-    // Redondeo para arriba porque si me no llegan a 9 los paginados, 
     // quiero que me traiga en la ultima pagina lo que sobre
+    //le saco los 10 de la primer pagina solo la primera vez
     
-    if(pageNumbers.length == 0)
+    if(pageNumbers.length == 0 && allCountries > 10)
     {
         allCountries = allCountries -10;
         pageNumbers.push(1);
     }
     
-
     for(let i = 1; i <= Math.ceil( allCountries / 9); i++){
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
         pageNumbers.push(i+1);
         
     }
+
     return (
         
-            <div className="Container">
-                
+            <div className="Container">       
                 {
+                    //Si tengo el paginado, devolve con un numero sus respectivas paginas y hacelas linkeables
                     pageNumbers.map(number => (
                         currentPage === number?
                         <li className="selected" key={number}>

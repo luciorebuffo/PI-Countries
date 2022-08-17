@@ -4,6 +4,7 @@ const initialState = {
     seachedCountries: [],
     country: {},
     activity: {},
+    
   };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ const reducer = (state = initialState, action) => {
         countries: action.payload,
         filteredCountries: action.payload,
       }
+    
   
     default:
       return state;
