@@ -1,15 +1,17 @@
 const initialState = {
-    countries: [],
-    filteredCountries: [],
-    seachedCountries: [],
-    country: {},
-    activity: {},
+
+  countries: [],
+  filteredCountries: [],
+  seachedCountries: [],
+  country: {},
+  activity: {},
     
-  };
+};
 
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
+    
     case "GET_COUNTRIES":
       
       return {

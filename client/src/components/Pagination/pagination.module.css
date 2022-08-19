@@ -16,7 +16,7 @@
 }
 
 
-li{
+.li{
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -28,7 +28,8 @@ li{
     font-family: 'Caveat', cursive;
 
 }
-li:hover{
+.li:hover{
+    cursor: pointer;
     color: #3498db;
     font-size: 2.3rem;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "./pagination.css";
+import style from "./pagination.module.css";
 
 function Pagination({currentPage, allCountries, paginado}){
 
@@ -23,16 +23,16 @@ function Pagination({currentPage, allCountries, paginado}){
 
     return (
         
-            <div className="Container">       
+            <div className={style.Container}>       
                 {
                     //Si tengo el paginado, devolve con un numero sus respectivas paginas y hacelas linkeables
                     pageNumbers.map(number => (
                         currentPage === number?
-                        <li className="selected" key={number}>
+                        <li className={`${style.selected} ${style.li}`} key={number}>
                             {<a onClick={() => paginado(number)}>{number}</a>}
                         </li>
                         :
-                        <li key={number}>
+                        <li className={style.li} key={number}>
                             {<a onClick={() => paginado(number)}>{number}</a>}
                         </li>
                     ))

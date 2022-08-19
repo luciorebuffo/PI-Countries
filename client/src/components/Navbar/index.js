@@ -1,14 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./navbar.css";
+import style from "./navbar.module.css";
 
 
 function Navbar(){
     return (
-        <div className = "Nav">
-            <NavLink className = "NavLink" to = "/">HenryCountries</NavLink>
-            <NavLink className = "NavLink" to = "/countries">Countries</NavLink>
-            <NavLink className = "NavLink" to = "/activity/create">Create Activity</NavLink>
+        <div className = {style.Nav}>
+            <NavLink className = {style.NavLink} to = "/">HenryCountries</NavLink>
+            <NavLink className = {style.NavLink} to = "/countries">Countries</NavLink>
+            <NavLink className = {style.NavLink} to = "/activity">Create Activity</NavLink>
         </div>
     )
 }

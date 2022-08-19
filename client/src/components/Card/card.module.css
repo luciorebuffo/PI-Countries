@@ -52,7 +52,7 @@ p{
     transform: scale(1.01);
 }
 
-.card-container{
+.cardContainer{
     display: inline-block;
     position: relative;
     width: 20rem;
@@ -63,13 +63,13 @@ p{
     margin: 30px;
 }
 
-.card-img{
+.cardImg{
     width: 100%;
     height: 16rem;
     object-fit: cover;
 }
 
-.card-description-bk {
+.cardDescriptionBk {
     /*background: linear-gradient(to right, #3266bb, #65C7F7, #9CECFB);*/
     /*background-image: linear-gradient(0deg, #3266bb, #65C7F7);*/
     background-image: linear-gradient( #4e8186, #92bfc4, #c9e1e4, #fdfdfd);
@@ -82,7 +82,7 @@ p{
     transform: skew(19deg, -9deg);
 }
 
-.card-description{
+.cardDescription{
     text-align: center;
     position: absolute;
     width: 100%;
@@ -97,7 +97,7 @@ p{
     
 }
 
-p{
+.p{
     font-size: 25px;
     font-family: 'Caveat', cursive;
 }

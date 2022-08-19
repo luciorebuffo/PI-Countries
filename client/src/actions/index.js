@@ -17,3 +17,12 @@ export const getCountries = () => {
     }
 }
 
+
+// guarda un nuevo registro en la tabla de actividades
+
+export const postActivity = async (payload) => {
+    return axios.post(API_URL+'activity', payload)
+   .then(function (response) {})
+   .catch(function (error) {});
+   
+ };

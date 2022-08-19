@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./countries.css";
+import style from"./countries.module.css";
 import { useDispatch, useSelector} from "react-redux";
 import {getCountries} from "../../actions";
 
@@ -61,45 +61,34 @@ function Countries(){
     }, [dispatch]);
     
     return (
-        <div className="countriesContainer">
-            <div className="home-paginado">
-                    <div className="home-painado-container">
-                        <Pagination
-                            allCountries={filteredCountries.length}
-                            paginado= {paginado}
-                            currentPage={currentPage}
-                        />
-                    </div>
-            </div>
-
-            <div className="home-cards">
-                {
-                    //Reviso si los paises estan cargados
-                    currentData().length === 0 ? (
-                        <h2 className="error-msg">Countries not found!</h2>
-                    ):  
+        <div className={style.countriesContainer}>
+            <Pagination
+                allCountries={filteredCountries.length}
+                paginado= {paginado}
+                currentPage={currentPage}
+            /> 
+            {
+            //Reviso si los paises estan cargados
+            currentData().length === 0 ? (
+                <h2 className="error-msg">Countries not found!</h2>
+            ):  
                     // Renderizo el componente card
-                    currentData().map((e) =>{ 
-                        return(
-                            <Card key={e.id} 
-                            id={e.id}  
-                            name={e.name} 
-                            img={e.flags} 
-                            continents={e.continents} 
-                            subregion={e.subregion} 
-                            capital={e.capital} 
-                            population={e.population} 
-                            area={e.area}
-                            />
-                        );
-                    })
-                }
-            </div>
-        </div>
-
-
-
-        
+            currentData().map((e) =>{ 
+                return(
+                    <Card key={e.id} 
+                        id={e.id}  
+                        name={e.name} 
+                        img={e.flags} 
+                        continents={e.continents} 
+                        subregion={e.subregion} 
+                        capital={e.capital} 
+                        population={e.population} 
+                        area={e.area}
+                        />
+                    );
+                })
+            }               
+        </div>    
     )
 }
 
