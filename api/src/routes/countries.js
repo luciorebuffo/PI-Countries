@@ -4,8 +4,9 @@ const { Activity, Country } = require("../db");
 const { Op } = require("sequelize");
 const {
     getCountryByName,
+    getCountryByPk
     
-} = require("../utils/utils");
+} = require("../utils/serviceCountry");
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -25,9 +26,20 @@ router.get("/countries", async function (req, res){
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-
-
     
+});
+
+router.get("/countries/:id", async function (req, res){
+    
+    const { id } = req.params;
+
+  try {
+    // de existir el país se muestra el detalle
+    res.status(200).json(await getCountryByPk(id));
+  } catch (error) {
+    // si no existe se muestra error
+    res.json({ error: error.message });
+  }
     
 });
 

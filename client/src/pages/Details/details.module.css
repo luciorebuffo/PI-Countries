@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+
+.container{
+    min-height: 100vh;  
+    height: auto;  
+}
+
+.cardDetails{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border: solid 1px black;*/
+   
+}
+
+.containerDetails{
+    width: 60%;
+    height: 70%;
+    /*border: solid 1px black;*/
+    border-radius: 8px;
+    background-color: rgb(253, 249, 249);
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);  
+    
+}
+
+/*IMG*/
+.containerIMG{
+    height: 100%;
+    width: 50%;
+    /*border: solid 1px black;*/
+    border-radius: 8px 0 0 8px;
+}
+.detailImg{
+    /*width: 412px;
+    height: 302px;*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+    /*border: solid 1px black;*/
+}
+
+/*DATA*/
+.containerData{
+    height: 100%;
+    width: 50%;
+    /*border: solid 1px black;*/
+    border-radius: 0 8px 8px 0;
+    background: linear-gradient( to bottom right, #4e8186, #92bfc4, #c9e1e4, #fdfdfd);
+    justify-content: center;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    font-weight: bold;
+}
+.dataName{
+    margin-top: 10%;
+    color: rgb(235, 228, 228);
+    font-size: 26px; 
+    
+}
+
+
+/*ACTIVITIES*/
+.containerActivities{
+    width: 100%;
+    display: inline-block;
+
+}
+.containerActivity{
+
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(rgb(250, 245, 245),rgb(176, 190, 194));
+    /*border: solid 1px black;*/
+    margin: 1%;
+    height: 300px;
+    width: 285px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3); 
+    font-size: 25px;
+    font-family: 'Caveat', cursive;
+    border-radius: 2px;
+
+}
+.name{
+    font-weight: bold;
+    font-size: 30px;
+}
+.difficulty{
+    color: #2377a8;
+}
+.duration{
+    color: #22818a;
+}

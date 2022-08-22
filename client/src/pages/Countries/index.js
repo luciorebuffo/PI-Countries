@@ -84,7 +84,7 @@ function Countries(){
                         capital={e.capital} 
                         population={e.population} 
                         area={e.area}
-                        />
+                    />
                     );
                 })
             }               

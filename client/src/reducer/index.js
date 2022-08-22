@@ -2,7 +2,7 @@ const initialState = {
 
   countries: [],
   filteredCountries: [],
-  seachedCountries: [],
+  searchedCountries: [],
   country: {},
   activity: {},
     
@@ -19,6 +19,23 @@ const reducer = (state = initialState, action) => {
         countries: action.payload,
         filteredCountries: action.payload,
       }
+    case "CREATE_ACTIVITY":
+      return {
+        ...state,
+        activity: action.payload,
+      };
+
+    case "GET_COUNTRY_BY_PK":
+      return {
+        ...state,
+        country: action.payload,
+      }
+
+    case "CLEAN_COUNTRY_BY_PK":
+        return {
+          ...state,
+          country: {},
+        }
     
   
     default:

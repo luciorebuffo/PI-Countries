@@ -57,15 +57,28 @@
 }
 
 /*textName*/
-.txtName{
-    margin: 1rem;
+.divName{
+    /*border: 1px solid black;*/
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; 
+}
+.txtName{  
     outline: none;
     border: 0;
     border-bottom: 1px solid #4e8186;  
-    width: 60%;
+    width: 50%;
     background: transparent;
     font-family: 'Caveat', cursive;
     font-size: 25px;
+    height: 30%;
+    margin-right: 3%; 
+}
+.nameValidation{
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
 }
 
 /*RANGE*/
@@ -77,7 +90,6 @@
 }
 /*rangeDificultad*/
 .rangeDificultad{
-    margin: 1rem;
     -webkit-appearance: none;
     margin-left: 0;
     width: 55%;
@@ -110,8 +122,7 @@
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background: #4f83a1;
     border-radius: 8px;
-    
-    
+       
 }
 .rangeDificultad:hover::-webkit-slider-runnable-track {
     background: #2377a8;
@@ -131,8 +142,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
-
+    margin-top: 2%;
+    height: 5%;
 }
 
 
@@ -144,8 +155,6 @@
     margin-right: 2.5%;
 }
 .rangeDuracion{
-    margin: 1rem;
-    
     -webkit-appearance: none;
     background: transparent; 
     width: 70%;
@@ -195,11 +204,11 @@
 }
 .divDuracion{
     width: 100%;
-    height: 30px;
+    height: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2%;
+   
 
 }
 
@@ -210,6 +219,7 @@
     margin-bottom: 0;
     top: 0;
     margin-top: 2%;
+    
 }
 .btnControl{
     height: 150px;
@@ -301,6 +311,7 @@
     font-family: 'Caveat', cursive;
     font-size: 30px;
     margin-bottom: 0;
+    height: 5%;
 
 }
 .selectControl{
@@ -339,13 +350,64 @@
     /*border: solid 1px black;*/
     height: 100%;
     width: 45%;
+    text-align: center;
+}
+
+/*my title*/
+.listTitle{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myListTitle{
+    font-family: 'Caveat', cursive;
+    font-size: 30px;
+    margin-bottom: 0;
+}
+.fullList{
+    height: 80%;
+    width: 100%;
+    
+}
+.selectSelectedCountry{
+    width: 100%;
+    border: none;
+    height: 100%;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    background-image: linear-gradient(to left, #4e8186, #92bfc4, #c9e1e4, #fdfdfd);
+}
+.selectedCountries{
+    background-image: linear-gradient(to left, #4e8186, #92bfc4, #c9e1e4, #fdfdfd);
+    border-bottom: 1px solid #4e8186;
+    font-family: 'Caveat', cursive;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.divMessage{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.myMessage{
+    font-family: 'Caveat', cursive;
+    font-size: 30px;
+    margin-top: 0;
 }
 
 
 
 /*CREATE BUTTON*/
 .btnCreateContainer{
-
     height: 5%;
     width: 100%;
     display: flex;
@@ -353,8 +415,6 @@
     align-items: center;
     /*border: solid 1px black;*/
     border-radius: 8px;
-   
-
 }
 .btnCreate{
     font-family: 'Caveat', cursive;
@@ -366,7 +426,6 @@
     text-align: center;
     font-size: 25px;
     background: linear-gradient(to bottom right, #54abc5, #0f69b3);
-    border: #368491;
     color: white;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     font-weight: bold;

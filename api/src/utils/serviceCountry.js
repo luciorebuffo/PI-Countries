@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Country } = require("../db");
+const { Activity, Country } = require("../db");
 
 //Guarda los paises de la api en mi bd
 const setCountries = async () => {
@@ -58,10 +58,7 @@ const getCountryByName = async (name) => {
             const filtered = Country.findAll({
                 where:{
                     name:{
-                        [Op.or]:{
-                            [Op.iLike]: `%${name}%`,
-                            [Op.startsWith]: `%${name}%`,
-                        }
+                        [Op.iLike]: `${name}%`
                     }    
                 }
             })
@@ -83,9 +80,42 @@ const getCountryByName = async (name) => {
     
 }
 
+const getCountryByPk = async (id) => {
+
+    try {
+
+        const detail = await Country.findOne({
+            where: {
+                id: id,
+            },
+            include: [
+                {
+                model: Activity,
+                    through: {
+                        attributes: [],
+                    }
+                }
+            ]
+        })
+
+        
+        if(!detail){
+            throw new Error("Country not found");
+        }
+
+        return detail;
+        
+    } catch (error) {
+        throw error;
+    }
+
+    
+}
+
 
 
 
 module.exports = {
     getCountryByName,
+    getCountryByPk
 }
