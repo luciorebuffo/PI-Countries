@@ -49,8 +49,7 @@ export const cleanCountryByPk = () =>{
 
 /*ACTIVITY*/
 // guarda un nuevo registro en la tabla de actividades
-export const createActivity = (payload) => 
-{
+export const createActivity = (payload) => {
     //console.log("action", payload);
 
     let activity = {
@@ -72,4 +71,29 @@ export const createActivity = (payload) =>
           payload: response.data,
         })
     }
+}
+
+
+/*FUNCTION ORDER*/
+export const orderBy = (order) => {
+  
+  return  (dispatch) => {
+    
+    dispatch({
+        type: "ORDER_BY",
+        payload: order
+    })
+
+  }
+}
+
+/*FUNCTION FILTER CONTIENENT*/
+export const filterCountries = (continent) =>{
+  return  (dispatch) => {
+    dispatch({
+      type: "FILTER_BY_ CONTINENT",
+      payload: continent
+  })
+  }
+
 }

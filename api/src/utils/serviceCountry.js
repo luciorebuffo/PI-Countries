@@ -5,18 +5,18 @@ const { Activity, Country } = require("../db");
 //Guarda los paises de la api en mi bd
 const setCountries = async () => {
     try {
-      const restCountries = await axios.get("https://restcountries.com/v2/all");
+      const restCountries = await axios.get("https://restcountries.com/v3/all");
   
       const countries = restCountries.data.map((country) => {
         return {
-          id: country.alpha3Code,
-          name: country.name,
-          flags: country.flags.svg,
+          id: country.cca3,
+          name: country.name.common,
+          flags: country.flags[1],
           continents: country.region,
           subregion: country.subregion,
-          capital: country.capital || "No tiene capital",
-          population: country.population,
-          area: country.area,
+          capital: country.capital ? country.capital[0] : "",
+          population: Number(country.population),
+          area: Number(country.area),
         };
       });
   

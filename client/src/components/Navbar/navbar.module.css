@@ -33,3 +33,12 @@
 .NavLink:hover{
     color: lightblue;
 }
+
+.NavImg{
+  position: relative;
+  background-color: black;
+  height: 60px;
+  width: 60px;
+  filter: brightness(1.1);
+  mix-blend-mode:lighten;
+}

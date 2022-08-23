@@ -9,13 +9,13 @@ function Pagination({currentPage, allCountries, paginado}){
     // quiero que me traiga en la ultima pagina lo que sobre
     //le saco los 10 de la primer pagina solo la primera vez
     
-    if(pageNumbers.length == 0 && allCountries > 10)
+    if(pageNumbers.length == 0 && allCountries > 9)
     {
-        allCountries = allCountries -10;
+        allCountries = allCountries -9;
         pageNumbers.push(1);
     }
     
-    for(let i = 1; i <= Math.ceil( allCountries / 9); i++){
+    for(let i = 1; i <= Math.ceil( allCountries / 10); i++){
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
         pageNumbers.push(i+1);
         
