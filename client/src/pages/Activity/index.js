@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import reducer from "../../reducer";
 import style from"./activity.module.css";
-import { createActivity, resetState } from "../../actions";
+import { createActivity, resetState, getCountries, orderBy } from "../../actions";
 import { useHistory } from "react-router-dom";
 
 
@@ -21,7 +21,7 @@ function Activity()
         season: [],
         countries: [],
     });
-
+    
     //console.log(values.countries);
 
     function setDif(event){
@@ -232,8 +232,11 @@ function Activity()
         if(validateInfo(values)) {
             dispatch(createActivity(values));
             dispatch(resetState());
-            history.push("/countries");
-            
+            dispatch(getCountries())
+            .then((data) => {
+                history.push("/countries");
+            });
+           
         }
     }
     function validateInfo(info){
@@ -269,6 +272,32 @@ function Activity()
         return true;
         
     }
+
+    useEffect(() => {
+
+        //componente montado en vacio
+
+        //cargo el componente con data
+        dispatch(getCountries())
+        .then((data) => {
+            //ordeno lo que tengo cargado en data
+            dispatch(orderBy("asc"));
+            //refresheo el html con la data cargada
+            setCountriesSelected([]);    
+        });
+
+        /*if(allCountries.length == 0){
+            dispatch(getCountries());
+     
+        }
+
+        if(allCountries.length > 0){
+            dispatch(orderBy("asc"));
+            setCountriesSelected([]);
+        }*/
+        
+        
+    }, [dispatch/*, allCountries*/]);
 
     return (
         <div className={style.Container}>       

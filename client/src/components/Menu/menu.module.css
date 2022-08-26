@@ -34,9 +34,7 @@
     font-family: 'Caveat', cursive;
     font-size: 23px;
 }
-.searchbar:hover{
-    width: 250px;
-}
+
 
 .btnSearchbar{
     height: 34px;
@@ -94,9 +92,7 @@
     font-size: 23px;
     
 }
-.searchbarName:hover{
-    width: 250px;
-}
+
 .btnSearchbarName{
 
     transition-delay: 130ms;

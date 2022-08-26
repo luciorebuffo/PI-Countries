@@ -22,7 +22,6 @@ function Countries(){
     const [countryName, setCountryName] = useState("");
     const [activityName, setActivityName] = useState("");
    
-    
 
     /*
     * Buscamos el primer y ultimo indice segun la posicion del paginado,

@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           filteredCountries: [],
+          searchedCountries: [],
         }
       
     case "ORDER_BY":
@@ -58,17 +59,29 @@ const reducer = (state = initialState, action) => {
         sortered = state.filteredCountries.sort((a, b) =>
           a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         );
+        state.countries = state.countries.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        );
       } else if (action.payload === "desc") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+        );
+        state.countries = state.countries.sort((a, b) =>
+        a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
         );
       } else if (action.payload === "minPop") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.population > b.population ? 1 : -1
         );
+        state.countries = state.countries.sort((a, b) =>
+        a.population > b.population ? 1 : -1
+        );
       } else if (action.payload === "maxPop") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.population < b.population ? 1 : -1
+        );
+        state.countries = state.countries.sort((a, b) =>
+        a.population < b.population ? 1 : -1
         );
       } else if (action.payload === "") {
         sortered = state.filteredCountries;

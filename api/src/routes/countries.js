@@ -22,16 +22,16 @@ router.get("/countries", async function (req, res){
     const name = req.query.name;
     
     try {
-        res.status(200).json(await getCountryByName(name));
+      res.status(200).json(await getCountryByName(name));
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
     
 });
 
 router.get("/countries/:id", async function (req, res){
     
-    const { id } = req.params;
+  const { id } = req.params;
 
   try {
     // de existir el país se muestra el detalle
