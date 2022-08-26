@@ -13,13 +13,19 @@ function Pagination({currentPage, allCountries, paginado}){
     {
         allCountries = allCountries -9;
         pageNumbers.push(1);
+
+
+        for(let i = 1; i <= Math.ceil( allCountries / 10); i++){
+            //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
+            pageNumbers.push(i+1);
+            
+        }
+    }
+    else{
+        pageNumbers.push(1);
     }
     
-    for(let i = 1; i <= Math.ceil( allCountries / 10); i++){
-        //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
-        pageNumbers.push(i+1);
-        
-    }
+    
 
     return (
         

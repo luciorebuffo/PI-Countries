@@ -8,7 +8,7 @@
     align-items: center;
     margin-top: 1%;
     height: 70px;
-    width: 60%;
+    width: 65%;
     border-radius: 10px;
     box-shadow: 0 0 25px 0 black;
     margin-left: 17%;
@@ -19,6 +19,8 @@
     height: 35px;
     width: 290px;
     /*border: white solid 1px*/
+    justify-content:flex-start;
+    align-items:center;
 }
 
 .searchbar{
@@ -46,6 +48,9 @@
     cursor: pointer;
     
 }
+.btnSearchbar:hover{
+    background-color: rgb(70, 68, 68);
+}
 .imgSearchbar{
     position: relative;
     height: 100%;
@@ -55,9 +60,89 @@
 
 /*SELECTS*/
 .select{
-    height: 30px;
-    width: 120px;
+    height: 33.5px;
+    width: 150px;
     cursor: pointer;
     outline: none;
-    margin: 1%;
+    border: 1px solid rgb(49, 48, 48);
+    font-family: 'Caveat', cursive;
+    font-size: 23px;
+    font-weight: bold;
+    
+}
+
+/*SEARCHBAR NAME*/
+.searchbarNameContainer{
+    display: inline-flex;
+    height: 35px;
+    width: 290px;
+    /*border: black solid 1px;*/
+    justify-content:flex-end;
+    align-items:center;
+ 
+}
+
+.searchbarName{
+    height: 30px;
+    width: 220px;
+    transition-delay: 130ms;
+    background-color: black;
+    border: 1px solid rgb(49, 48, 48);
+    outline: none;
+    color: #fff;
+    font-family: 'Caveat', cursive;
+    font-size: 23px;
+    
+}
+.searchbarName:hover{
+    width: 250px;
+}
+.btnSearchbarName{
+
+    transition-delay: 130ms;
+    height: 34px;
+    width: 34px;
+    background-color: rgb(49, 48, 48);
+    border-radius: 8px 0 0 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
+.btnSearchbarName:hover{
+    background-color: rgb(70, 68, 68);
+}
+.imgSearchbarName{
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+}
+
+
+/*BUTTON RESET*/
+.btnReset{
+    height: 34px;
+    width: 75px;
+    margin-left: 15%;
+    font-family: 'Caveat', cursive;
+    /*background: linear-gradient(to bottom right, #cc9d55, #b3660f);*/
+    background: #c9423d;
+    color: white;
+    border: #cc534e 1px solid;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    /*font-weight: bold;*/
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    font-size: 23px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+.btnReset:hover{
+    transform: scale(1.1);
+    background: #cc2b26;
+    border: #cf3833 1px solid;
+
 }

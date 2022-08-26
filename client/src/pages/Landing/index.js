@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function LandingPage(){
 
     return (
+        
         <div className = {style.container}>
             <div className ={style.title}>
                 <h1 className ={style.h1}>Welcome to</h1>

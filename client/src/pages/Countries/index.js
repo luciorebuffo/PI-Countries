@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from"./countries.module.css";
 import { useDispatch, useSelector} from "react-redux";
-import {getCountries, orderBy, filterCountries} from "../../actions";
+import {getCountries, orderBy, filterByContinent, getCountryByName,filterByActivity,resetState} from "../../actions";
 
 
 import  Pagination  from "../../components/Pagination";
@@ -18,10 +18,12 @@ function Countries(){
     const [countriesPerPage, setCountriesPerPage] = useState(9); //Ya que 'currentPage = 1' seteo las ciudades en 9
 
     const [order, setOrder] = useState("");
-    //console.log(order);
-
     const [filter, setFilter] = useState("");
+    const [countryName, setCountryName] = useState("");
+    const [activityName, setActivityName] = useState("");
+   
     
+
     /*
     * Buscamos el primer y ultimo indice segun la posicion del paginado,
     * y retornamos las ciudades entre esos indices para mostrar segun cada page
@@ -42,6 +44,7 @@ function Countries(){
        return filteredCountries.slice(indexOfFirstCountry, indexOfLastCountry);
       
     }
+
     /*
     * Al hacer click en algun indice del paginado ejecutamos esta funcion,
     * segun el indice que recible setea el indice recibido y las ciudades por paginado
@@ -60,40 +63,118 @@ function Countries(){
 
     }
 
-    /*Vamo a Filtrar*/
+    /*Filtrado por continente*/
     function filterContinent(event){
         //console.log(event.target.value);
 
         //le digo al action filtra
-        dispatch(filterCountries(event.target.value));
+        dispatch(filterByContinent(event.target.value));
 
         //seteo el tipo de filtro, y refresheo el componente
         setFilter(event.target.value);
+        setCurrentPage(1);
+        setCountriesPerPage(9);
     }
 
-    /*Vamo a Ordenar*/
+    /*Ordenamiento*/
     function ordenar(event){
-        //console.log(event.target.value);
-
-
         //Le digo al action ordena
         dispatch(orderBy(event.target.value));
 
         // setea el estado y refreshea el componente
         setOrder(event.target.value);
+        
     }
 
+    /*Busqueda por nombre*/
+    function handleByName(event){
+
+        if(validateString(event.target.value)){
+
+            setCountryName(event.target.value);
+
+        }
+
+    }
+    function validateString(name)
+    {
+        return /^[a-zA-Z]+$/.test(name);
+
+    }
+    function searchByname(){
+
+        if(countryName != "")
+        {
+            //console.log(countryName);
+            dispatch(getCountryByName(countryName));
+            setCurrentPage(1);
+            setCountriesPerPage(9);
+        }
+    }
+
+    /*Filtrado por actividad */
+    function handleByActivity(event){
+
+        if(validateString(event.target.value)){
+
+            setActivityName(event.target.value);
+
+        }
+
+    }
+    function filterActivity(){
+
+        if(activityName != "")
+        {
+            //console.log(activityName);
+            dispatch(filterByActivity(activityName));
+            setCurrentPage(1);
+            setCountriesPerPage(9);
+        }
+    }
+
+    /*Reset Button*/
+    function reset(){
+        dispatch(resetState());
+        resetOptions();
+        setCountryName("");
+        setActivityName("");
+        setOrder("");
+        setFilter("All");
+        dispatch(getCountries());
+        setCurrentPage(1);
+        setCountriesPerPage(9);
+    }
+    function resetOptions(){
+        document.getElementById("selectOrder").value = "";
+        document.getElementById("selectContinent").value = "All";
+        document.getElementById("inputName").value = "";
+        document.getElementById("inputActivity").value = "";
+        
+    }
+
+    
+    
+    
+    
     useEffect(() => {
 
-        dispatch(getCountries());
-
+        if(filteredCountries.length == 0){
+            dispatch(getCountries());
+        }
+        
     }, [dispatch]);
     
     return (
         <div className={style.countriesContainer}>
             <Menu 
+            byName =  {handleByName}
+            nameOnClick = {searchByname}
             filterContinent = {filterContinent}
             ordenar = {ordenar}
+            byActivity = {handleByActivity}
+            activityOnClick = {filterActivity}
+            reset = {reset}
             />
             {
             //Reviso si los paises estan cargados

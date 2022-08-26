@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import reducer from "../../reducer";
 import style from"./activity.module.css";
-import { createActivity } from "../../actions";
+import { createActivity, resetState } from "../../actions";
+import { useHistory } from "react-router-dom";
+
 
 function Activity()
 {
+    let history = useHistory();
     const dispatch = useDispatch();
     let allCountries = useSelector((store) => store.countries);
     const [countriesSelected, setCountriesSelected] = useState([]);
@@ -194,7 +197,7 @@ function Activity()
     }
     function addName(event){
         
-        console.log(message);
+        //console.log(message);
 
         if(validateName(event.target.value))
         {  
@@ -209,8 +212,7 @@ function Activity()
         else{
             event.target.style.borderBottom = "1px solid red";
             if(event.target.value.length == 0)
-            {
-                
+            {          
                 setMessage("You should add a name!");
             }
             else{
@@ -224,11 +226,13 @@ function Activity()
         return /^[a-zA-Z]+$/.test(name);
 
     }
-    function createNewActivity(event){
+    async function createNewActivity(event){
         event.preventDefault();
         
         if(validateInfo(values)) {
             dispatch(createActivity(values));
+            dispatch(resetState());
+            history.push("/countries");
             
         }
     }

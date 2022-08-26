@@ -1,8 +1,9 @@
 const initialState = {
 
-  countries: [],
-  filteredCountries: [],
-  searchedCountries: [],
+  countries: [],//Los paises traidos del back static.
+  filteredCountries: [],//Los paises que muestro filtrados/ordenados.
+  searchedCountries: [],//Paises/pais traido por nombre.
+  
   country: {},
   activity: {},
     
@@ -13,11 +14,18 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     
     case "GET_COUNTRIES":
-      
       return {
         ...state,
         countries: action.payload,
         filteredCountries: action.payload,
+      }
+
+    case "GET_COUNTRY_BY_NAME":
+      //console.log(state.countries);
+      return {
+        ...state,
+        filteredCountries: action.payload,
+        searchedCountries: action.payload,
       }
     case "CREATE_ACTIVITY":
       return {
@@ -35,6 +43,12 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           country: {},
+        }
+    case "RESET_STATE":
+      console.log("estamo aca");
+        return {
+          ...state,
+          filteredCountries: [],
         }
       
     case "ORDER_BY":
@@ -65,42 +79,54 @@ const reducer = (state = initialState, action) => {
         filteredCountries: sortered,
       };
 
-    case "FILTER_BY_ CONTINENT":
+    case "FILTER_BY_CONTINENT":
 
       let filtered= [];
-     
+      let stateToFilter = [];
+
+      if(state.searchedCountries.length == 0)
+      {
+        stateToFilter = state.countries;
+      }
+      else{
+        stateToFilter = state.searchedCountries;
+      }
       
       switch (action.payload) {
         case "America":
-          filtered = state.countries.filter((country) =>
+          filtered = stateToFilter.filter((country) =>
             country.continents.includes("Americas")
           )
           break;
         case "Africa":
-          filtered = state.countries.filter((country) =>
+          filtered = stateToFilter.filter((country) =>
             
             country.continents.includes("Africa")
           )
           break;
         case "Asia":
-          filtered = state.countries.filter((country) =>
+          filtered = stateToFilter.filter((country) =>
             country.continents.includes("Asia")
           ) 
           break;
         case "Europe":
-          filtered = state.countries.filter((country) =>
+          filtered = stateToFilter.filter((country) =>
             country.continents.includes("Europe")
           )
           break;
         case "Oceania":
-          filtered = state.countries.filter((country) =>
+          filtered = stateToFilter.filter((country) =>
             country.continents.includes("Oceania")
           )
-
+          break;
+        case "Antarctic":
+          filtered = stateToFilter.filter((country) =>
+            country.continents.includes("Antarctic")
+          )
           break;
         default:
           
-          filtered = state.countries;
+          filtered = stateToFilter;
           break;
       }
       //console.log(filtered)
@@ -108,9 +134,37 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredCountries: filtered,
       }
+    case "FILTER_BY_ACTIVITY":
+        
+      let filtByActy= [];
+      let stateToFilterByAct = [];
+
+      if(state.searchedCountries.length == 0)
+      {
+        stateToFilterByAct = state.countries;
+      }
+      else{
+        stateToFilterByAct = state.searchedCountries;
+      }
+      
+      stateToFilterByAct.forEach(country => {
+        
+        country.activities.forEach(activity => {
+
+          if(activity.name == action.payload)
+          {
+            filtByActy.push(country);
+          }
+          
+        });
+
+      });
+      
+      return {
+        ...state,
+        filteredCountries: filtByActy,
+      }
        
-    
-  
     default:
       return state;
   }

@@ -13,7 +13,7 @@ const setCountries = async () => {
           name: country.name.common,
           flags: country.flags[1],
           continents: country.region,
-          subregion: country.subregion,
+          subregion: country.subregion || "No tiene",
           capital: country.capital ? country.capital[0] : "",
           population: Number(country.population),
           area: Number(country.area),
@@ -30,7 +30,16 @@ const setCountries = async () => {
 //Retorno todo de la tabla country
 const getCountries = async () =>{
     try {
-        const countries = await Country.findAll();
+        const countries = await Country.findAll(
+            {include: [
+                {
+                model: Activity,
+                    through: {
+                        attributes: [],
+                    }
+                }
+            ]}
+        );
         return countries;
     } catch (error) {
         console.log(error);
@@ -60,7 +69,15 @@ const getCountryByName = async (name) => {
                     name:{
                         [Op.iLike]: `${name}%`
                     }    
-                }
+                },
+                include: [
+                    {
+                    model: Activity,
+                        through: {
+                            attributes: [],
+                        }
+                    }
+                ]
             })
             
             if (!filtered) {

@@ -18,6 +18,25 @@ export const getCountries = () => {
     }
 }
 
+//Paises por Nombre
+export const getCountryByName = (data) => {
+
+  return async (dispatch) => {
+
+    const response = await axios.get(API_URL+"countries?name="+data);
+
+    dispatch({
+      type: "GET_COUNTRY_BY_NAME",
+      payload: response.data,
+    });
+
+
+  };
+
+};
+
+
+//Paises por id = PK
 export const getCountryByPk = (id) =>{
 
   return async (dispatch) => {
@@ -32,7 +51,7 @@ export const getCountryByPk = (id) =>{
   }
 
 }
-
+//Un clean para evitar errores visuales al traer otro por id
 export const cleanCountryByPk = () =>{
 
   return async (dispatch) => {
@@ -44,8 +63,6 @@ export const cleanCountryByPk = () =>{
   }
 
 }
-
-
 
 /*ACTIVITY*/
 // guarda un nuevo registro en la tabla de actividades
@@ -87,13 +104,36 @@ export const orderBy = (order) => {
   }
 }
 
-/*FUNCTION FILTER CONTIENENT*/
-export const filterCountries = (continent) =>{
+/*FILTERS*/
+export const filterByContinent = (continent) =>{
   return  (dispatch) => {
     dispatch({
-      type: "FILTER_BY_ CONTINENT",
+      type: "FILTER_BY_CONTINENT",
       payload: continent
   })
+  }
+
+}
+
+export const filterByActivity = (activity) =>{
+  return  (dispatch) => {
+    dispatch({
+      type: "FILTER_BY_ACTIVITY",
+      payload: activity
+  })
+  }
+
+}
+
+
+/*RESET STATE*/
+ 
+export const resetState = () =>{
+  return  (dispatch) => {
+    dispatch({
+      type: "RESET_STATE",
+      
+    })
   }
 
 }

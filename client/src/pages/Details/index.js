@@ -21,9 +21,8 @@ function Details() {
 
         dispatch(getCountryByPk(id));
         
-
+        // Component unmount.
         return () => {
-            // Component unmount.
             dispatch(cleanCountryByPk());
         }
 
