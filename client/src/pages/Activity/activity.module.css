@@ -437,3 +437,52 @@
     background: linear-gradient(to bottom right, #30778d, #0b497c);
     color: rgb(243, 237, 237);
 }
+
+
+
+
+/*MODAL*/
+.divModal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    font-family: 'Caveat', cursive;
+}
+.modalContent {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+    width: 15%; /* Could be more or less, depending on screen size */
+    font-size: 30px;
+}
+.btnModal{
+    border-radius: 8px;
+    background: linear-gradient(to bottom right, #54c56c, #0fb317);
+    color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 70px;
+
+}
+.btnModal:hover{
+    background: linear-gradient(to bottom right, #308d3f, #0b7c3e);
+    color: rgb(243, 237, 237);
+}

@@ -226,17 +226,19 @@ function Activity()
         return /^[a-zA-Z]+$/.test(name);
 
     }
-    async function createNewActivity(event){
+    function createNewActivity(event){
         event.preventDefault();
         
         if(validateInfo(values)) {
-            dispatch(createActivity(values));
-            dispatch(resetState());
-            dispatch(getCountries())
-            .then((data) => {
-                history.push("/countries");
-            });
-           
+
+            dispatch(createActivity(values))
+            .then(((data) => {
+                dispatch(getCountries())
+                .then(((data) => {
+                    document.getElementById("myModal").style.display = "block";
+                }))
+            }));  
+
         }
     }
     function validateInfo(info){
@@ -271,6 +273,12 @@ function Activity()
         
         return true;
         
+    }
+    
+    //aceptar del modal que navega
+    function aceptModal(){
+        document.getElementById("myModal").style.display = "none";
+        history.push("/countries");
     }
 
     useEffect(() => {
@@ -384,6 +392,15 @@ function Activity()
                         </button>
                     </div>
                 </form>
+
+                <div id="myModal" className={style.divModal}>
+
+                    <div className={style.modalContent}>
+                        <p>Activity Created!!!</p>
+                        <input className ={style.btnModal}type="button" value="ACEPTAR" onClick={aceptModal}></input>
+                    </div>
+
+                </div>
                 
         </div>
     )

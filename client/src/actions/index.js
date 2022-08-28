@@ -136,3 +136,26 @@ export const resetState = () => {
   }
 
 }
+
+/*SET PAGE*/
+export const setPage = (page) => {
+  return (dispatch) => {
+    dispatch({
+      type: "SET_PAGE",
+      payload: page
+    })
+  }
+
+}
+
+/*SET COUNTRIES PAGE*/
+export const countriesPage = (countriesPerPage) => {
+  return (dispatch) => {
+    dispatch({
+      type: "SET_COUNTRIES_PER_PAGE",
+      payload: countriesPerPage
+
+    })
+  }
+
+}

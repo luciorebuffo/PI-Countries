@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import style from"./countries.module.css";
 import { useDispatch, useSelector} from "react-redux";
-import {getCountries, orderBy, filterByContinent, getCountryByName,filterByActivity,resetState} from "../../actions";
+import {
+    getCountries, 
+    orderBy, 
+    filterByContinent, 
+    getCountryByName,
+    filterByActivity,
+    resetState,
+    setPage,
+    countriesPage
+} from "../../actions";
 
 
 import  Pagination  from "../../components/Pagination";
@@ -14,8 +23,10 @@ function Countries(){
 
     const dispatch = useDispatch();
     const filteredCountries = useSelector((state) => state.filteredCountries);
-    const [currentPage, setCurrentPage] = useState(1); //Arranco en la primer pagina (useState(1))
-    const [countriesPerPage, setCountriesPerPage] = useState(9); //Ya que 'currentPage = 1' seteo las ciudades en 9
+    const page = useSelector((state) => state.page);
+    const countriesPag = useSelector((state) => state.countriesPerPage);
+    const [currentPage, setCurrentPage] = useState(page); 
+    const [countriesPerPage, setCountriesPerPage] = useState(countriesPag); 
 
     const [order, setOrder] = useState("");
     const [filter, setFilter] = useState("");
@@ -51,13 +62,17 @@ function Countries(){
     function paginado(pageNumber){
         
         setCurrentPage(pageNumber);
+        dispatch(setPage(pageNumber));
 
         if(pageNumber == 1)
         {
             setCountriesPerPage(9);
+            dispatch(countriesPage(9));
+
         }
         else{
             setCountriesPerPage(10);
+            dispatch(countriesPage(10));
         }
 
     }
@@ -71,6 +86,10 @@ function Countries(){
 
         //seteo el tipo de filtro, y refresheo el componente
         setFilter(event.target.value);
+
+        //acomodo las page para evitar errores
+        dispatch(setPage(1));
+        dispatch(countriesPage(9));
         setCurrentPage(1);
         setCountriesPerPage(9);
     }
@@ -141,6 +160,8 @@ function Countries(){
         setOrder("");
         setFilter("All");
         dispatch(getCountries());
+        dispatch(setPage(1));
+        dispatch(countriesPage(9));
         setCurrentPage(1);
         setCountriesPerPage(9);
     }

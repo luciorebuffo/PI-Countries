@@ -3,16 +3,17 @@ const initialState = {
   countries: [],//Los paises traidos del back static.
   filteredCountries: [],//Los paises que muestro filtrados/ordenados.
   searchedCountries: [],//Paises/pais traido por nombre.
-  
+  page: 1,
+  countriesPerPage: 9,
   country: {},
   activity: {},
-    
+
 };
 
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    
+
     case "GET_COUNTRIES":
       return {
         ...state,
@@ -40,18 +41,18 @@ const reducer = (state = initialState, action) => {
       }
 
     case "CLEAN_COUNTRY_BY_PK":
-        return {
-          ...state,
-          country: {},
-        }
+      return {
+        ...state,
+        country: {},
+      }
     case "RESET_STATE":
       console.log("estamo aca");
-        return {
-          ...state,
-          filteredCountries: [],
-          searchedCountries: [],
-        }
-      
+      return {
+        ...state,
+        filteredCountries: [],
+        searchedCountries: [],
+      }
+
     case "ORDER_BY":
       let sortered = [];
 
@@ -60,28 +61,28 @@ const reducer = (state = initialState, action) => {
           a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         );
         state.countries = state.countries.sort((a, b) =>
-        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         );
       } else if (action.payload === "desc") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
         );
         state.countries = state.countries.sort((a, b) =>
-        a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+          a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
         );
       } else if (action.payload === "minPop") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.population > b.population ? 1 : -1
         );
         state.countries = state.countries.sort((a, b) =>
-        a.population > b.population ? 1 : -1
+          a.population > b.population ? 1 : -1
         );
       } else if (action.payload === "maxPop") {
         sortered = state.filteredCountries.sort((a, b) =>
           a.population < b.population ? 1 : -1
         );
         state.countries = state.countries.sort((a, b) =>
-        a.population < b.population ? 1 : -1
+          a.population < b.population ? 1 : -1
         );
       } else if (action.payload === "") {
         sortered = state.filteredCountries;
@@ -94,17 +95,16 @@ const reducer = (state = initialState, action) => {
 
     case "FILTER_BY_CONTINENT":
 
-      let filtered= [];
+      let filtered = [];
       let stateToFilter = [];
 
-      if(state.searchedCountries.length == 0)
-      {
+      if (state.searchedCountries.length == 0) {
         stateToFilter = state.countries;
       }
-      else{
+      else {
         stateToFilter = state.searchedCountries;
       }
-      
+
       switch (action.payload) {
         case "America":
           filtered = stateToFilter.filter((country) =>
@@ -113,14 +113,14 @@ const reducer = (state = initialState, action) => {
           break;
         case "Africa":
           filtered = stateToFilter.filter((country) =>
-            
+
             country.continents.includes("Africa")
           )
           break;
         case "Asia":
           filtered = stateToFilter.filter((country) =>
             country.continents.includes("Asia")
-          ) 
+          )
           break;
         case "Europe":
           filtered = stateToFilter.filter((country) =>
@@ -138,7 +138,7 @@ const reducer = (state = initialState, action) => {
           )
           break;
         default:
-          
+
           filtered = stateToFilter;
           break;
       }
@@ -148,36 +148,43 @@ const reducer = (state = initialState, action) => {
         filteredCountries: filtered,
       }
     case "FILTER_BY_ACTIVITY":
-        
-      let filtByActy= [];
+
+      let filtByActy = [];
       let stateToFilterByAct = [];
 
-      if(state.searchedCountries.length == 0)
-      {
+      if (state.searchedCountries.length == 0) {
         stateToFilterByAct = state.countries;
       }
-      else{
+      else {
         stateToFilterByAct = state.searchedCountries;
       }
-      
+
       stateToFilterByAct.forEach(country => {
-        
+
         country.activities.forEach(activity => {
 
-          if(activity.name == action.payload)
-          {
+          if (activity.name == action.payload) {
             filtByActy.push(country);
           }
-          
+
         });
 
       });
-      
       return {
         ...state,
         filteredCountries: filtByActy,
       }
-       
+    case "SET_PAGE":    
+      return {
+        ...state,
+        page: action.payload,
+      }
+    case "SET_COUNTRIES_PER_PAGE":    
+      return {
+        ...state,
+        countriesPerPage: action.payload,
+      }
+
     default:
       return state;
   }
