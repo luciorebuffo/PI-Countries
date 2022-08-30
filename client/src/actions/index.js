@@ -4,7 +4,7 @@ const API_URL = "http://localhost:3001/";
 
 /*COUNTRY*/
 //Pedimos todos los paises al back
-export const getCountries = () => {
+ export const getCountries = () => {
 
   return async (dispatch) => {
 
@@ -17,6 +17,39 @@ export const getCountries = () => {
 
   }
 }
+
+/*export const getCountries = () => {
+
+  return (dispatch) => {
+
+    axios.get(API_URL + "countries")
+    .then((response) => 
+      dispatch({
+        type: "GET_COUNTRIES",
+        payload: response.data,
+      }) 
+    )
+
+  }
+}*/
+
+/*export function getCountries(){
+
+  return function (dispatch){
+
+    return fetch(API_URL + "countries")
+    .then((response) => response.json())
+    .then((json) => {
+      dispatch({
+        type: "GET_COUNTRIES",
+        payload: json,
+      })
+
+    })
+    
+  }
+}*/
+
 
 //Paises por Nombre
 export const getCountryByName = (data) => {
@@ -105,24 +138,14 @@ export const orderBy = (order) => {
 }
 
 /*FILTERS*/
-export const filterByContinent = (continent) => {
+
+export const filterAll = (activity,continent) => {
   return (dispatch) => {
     dispatch({
-      type: "FILTER_BY_CONTINENT",
-      payload: continent
+      type: "FILTER_ALL",
+      payload: {activity: activity,continent: continent}
     })
   }
-
-}
-
-export const filterByActivity = (activity) => {
-  return (dispatch) => {
-    dispatch({
-      type: "FILTER_BY_ACTIVITY",
-      payload: activity
-    })
-  }
-
 }
 
 

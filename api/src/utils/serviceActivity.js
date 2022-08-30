@@ -31,8 +31,21 @@ const createActivity = async (activity, countries) =>{
       }
 }
 
+//un borrado para practicar
+async function deleteActivity(name){
+  
+  const myActivity = await Activity.findOne({
+    where:{name: name}
+  });
+
+  if(myActivity){
+    await myActivity.destroy();
+  }
+}
+
 
 
 module.exports = {
     createActivity,
+    deleteActivity
 }

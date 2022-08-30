@@ -3,13 +3,12 @@ import style from"./countries.module.css";
 import { useDispatch, useSelector} from "react-redux";
 import {
     getCountries, 
-    orderBy, 
-    filterByContinent, 
+    orderBy,  
     getCountryByName,
-    filterByActivity,
     resetState,
     setPage,
-    countriesPage
+    countriesPage,
+    filterAll,
 } from "../../actions";
 
 
@@ -29,11 +28,11 @@ function Countries(){
     const [countriesPerPage, setCountriesPerPage] = useState(countriesPag); 
 
     const [order, setOrder] = useState("");
-    const [filter, setFilter] = useState("");
+    const [filter, setFilter] = useState("All");
     const [countryName, setCountryName] = useState("");
     const [activityName, setActivityName] = useState("");
    
-
+    console.log(activityName);
     /*
     * Buscamos el primer y ultimo indice segun la posicion del paginado,
     * y retornamos las ciudades entre esos indices para mostrar segun cada page
@@ -76,16 +75,49 @@ function Countries(){
         }
 
     }
+    //prev
+    function prev()
+    {
+        if(currentPage > 1)
+        {
+            let newPage = currentPage - 1;
+            setCurrentPage(newPage);
+
+            if(newPage == 1)
+            {
+                setCountriesPerPage(9);
+                dispatch(countriesPage(9));
+            }
+        }
+    }
+    //next
+    function next(pageNumber)
+    { 
+        if(currentPage < pageNumber)
+        {
+            let newPage = currentPage + 1;
+            setCurrentPage(newPage);
+
+            if(newPage != 1)
+            {
+                setCountriesPerPage(10);
+                dispatch(countriesPage(10));
+            }
+        }
+    }
+
+
+
 
     /*Filtrado por continente*/
     function filterContinent(event){
         //console.log(event.target.value);
 
         //le digo al action filtra
-        dispatch(filterByContinent(event.target.value));
-
-        //seteo el tipo de filtro, y refresheo el componente
+        //dispatch(filterByContinent(event.target.value));
         setFilter(event.target.value);
+        dispatch(filterAll(activityName,event.target.value));
+        
 
         //acomodo las page para evitar errores
         dispatch(setPage(1));
@@ -139,13 +171,19 @@ function Countries(){
 
         }
 
+        if(event.target.value.length == 0)
+        {
+            setActivityName("");
+        }
     }
     function filterActivity(){
 
         if(activityName != "")
         {
             //console.log(activityName);
-            dispatch(filterByActivity(activityName));
+            //dispatch(filterByActivity(activityName));
+            dispatch(filterAll(activityName,filter));
+            
             setCurrentPage(1);
             setCountriesPerPage(9);
         }
@@ -176,7 +214,6 @@ function Countries(){
     
     
     
-    
     useEffect(() => {
 
         if(filteredCountries.length == 0){
@@ -199,11 +236,12 @@ function Countries(){
             {
             //Reviso si los paises estan cargados
             currentData().length === 0 ? (
-                <h2 className="error-msg">Countries not found!</h2>
+                <h2 className={style.errorMsg}>Countries not found!</h2>
             ):  
                     // Renderizo el componente card
             currentData().map((e) =>{ 
                 return(
+                    
                     <Card key={e.id} 
                         id={e.id}  
                         name={e.name} 
@@ -214,6 +252,7 @@ function Countries(){
                         population={e.population} 
                         area={e.area}
                     />
+                    
                     );
                 })
             }     
@@ -221,6 +260,8 @@ function Countries(){
                 allCountries={filteredCountries.length}
                 paginado= {paginado}
                 currentPage={currentPage}
+                prev = {prev}
+                next = {next}
             />          
         </div>    
     )

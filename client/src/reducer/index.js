@@ -91,88 +91,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredCountries: sortered,
-      };
-
-    case "FILTER_BY_CONTINENT":
-
-      let filtered = [];
-      let stateToFilter = [];
-
-      if (state.searchedCountries.length == 0) {
-        stateToFilter = state.countries;
-      }
-      else {
-        stateToFilter = state.searchedCountries;
-      }
-
-      switch (action.payload) {
-        case "America":
-          filtered = stateToFilter.filter((country) =>
-            country.continents.includes("Americas")
-          )
-          break;
-        case "Africa":
-          filtered = stateToFilter.filter((country) =>
-
-            country.continents.includes("Africa")
-          )
-          break;
-        case "Asia":
-          filtered = stateToFilter.filter((country) =>
-            country.continents.includes("Asia")
-          )
-          break;
-        case "Europe":
-          filtered = stateToFilter.filter((country) =>
-            country.continents.includes("Europe")
-          )
-          break;
-        case "Oceania":
-          filtered = stateToFilter.filter((country) =>
-            country.continents.includes("Oceania")
-          )
-          break;
-        case "Antarctic":
-          filtered = stateToFilter.filter((country) =>
-            country.continents.includes("Antarctic")
-          )
-          break;
-        default:
-
-          filtered = stateToFilter;
-          break;
-      }
-      //console.log(filtered)
-      return {
-        ...state,
-        filteredCountries: filtered,
-      }
-    case "FILTER_BY_ACTIVITY":
-
-      let filtByActy = [];
-      let stateToFilterByAct = [];
-
-      if (state.searchedCountries.length == 0) {
-        stateToFilterByAct = state.countries;
-      }
-      else {
-        stateToFilterByAct = state.searchedCountries;
-      }
-
-      stateToFilterByAct.forEach(country => {
-
-        country.activities.forEach(activity => {
-
-          if (activity.name == action.payload) {
-            filtByActy.push(country);
-          }
-
-        });
-
-      });
-      return {
-        ...state,
-        filteredCountries: filtByActy,
       }
     case "SET_PAGE":    
       return {
@@ -184,6 +102,84 @@ const reducer = (state = initialState, action) => {
         ...state,
         countriesPerPage: action.payload,
       }
+
+      /*filtros encadenados*/
+    case "FILTER_ALL":  
+      let filteredContinent = []; // pusheo filtradas por contienente
+      let stateFilter = [];//seteo segun si estan fil by name o no
+      let filByAct = []; // pusheo filtradas por actividad si vino algo
+
+      if (state.searchedCountries.length == 0) {
+        stateFilter = state.countries;
+      }
+      else {
+        stateFilter = state.searchedCountries;
+      }
+
+      switch (action.payload.continent) {
+        case "America":
+          filteredContinent = stateFilter.filter((country) =>
+            country.continents.includes("Americas")
+          )
+          break;
+        case "Africa":
+          filteredContinent = stateFilter.filter((country) =>
+
+            country.continents.includes("Africa")
+          )
+          break;
+        case "Asia":
+          filteredContinent = stateFilter.filter((country) =>
+            country.continents.includes("Asia")
+          )
+          break;
+        case "Europe":
+          filteredContinent = stateFilter.filter((country) =>
+            country.continents.includes("Europe")
+          )
+          break;
+        case "Oceania":
+          filteredContinent = stateFilter.filter((country) =>
+            country.continents.includes("Oceania")
+          )
+          break;
+        case "Antarctic":
+          filteredContinent = stateFilter.filter((country) =>
+            country.continents.includes("Antarctic")
+          )
+          break;
+        default:
+          filteredContinent = stateFilter;
+          break;
+      }  
+      
+      if(action.payload.activity != "")
+      {
+        filteredContinent.forEach(country => {
+
+          country.activities.forEach(activity => {
+  
+            if (activity.name == action.payload.activity) {
+              filByAct.push(country);
+            }
+  
+          });
+  
+        });
+
+        return {
+          ...state,
+          filteredCountries: filByAct,
+        }
+      }
+      
+      return {
+          ...state,
+          filteredCountries: filteredContinent,
+      }
+      
+      
+      
 
     default:
       return state;

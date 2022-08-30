@@ -21,6 +21,7 @@ function Activity()
         season: [],
         countries: [],
     });
+   //console.log(values.name);
     
     //console.log(values.countries);
 
@@ -212,7 +213,11 @@ function Activity()
         else{
             event.target.style.borderBottom = "1px solid red";
             if(event.target.value.length == 0)
-            {          
+            {      
+                setValues({
+                    ...values,
+                    name: "",
+                });    
                 setMessage("You should add a name!");
             }
             else{
@@ -243,19 +248,24 @@ function Activity()
     }
     function validateInfo(info){
         
-        if(!validateName(info.name))
+        let nameText = document.getElementById("txtName").value;
+        
+        if(!validateName(info.name) || !validateName(nameText))
         {
             document.getElementById("txtName").style.borderBottom = "solid red 1px";
-            if(info.name == 0)
+            
+            if(info.name.length == 0)
             {
                 
                 setMessage("You should add a name!");
+                return false;
             }
-            else{
-                setMessage("Only letters!");
-            }
-
+            
+            setMessage("Only letters!");
             return false;
+            
+
+            
         }
         if(info.season.length == 0){
 
@@ -283,29 +293,27 @@ function Activity()
 
     useEffect(() => {
 
-        //componente montado en vacio
 
         //cargo el componente con data
-        dispatch(getCountries())
-        .then((data) => {
-            //ordeno lo que tengo cargado en data
-            dispatch(orderBy("asc"));
-            //refresheo el html con la data cargada
-            setCountriesSelected([]);    
-        });
-
-        /*if(allCountries.length == 0){
-            dispatch(getCountries());
-     
+        if(allCountries.length == 0){
+            dispatch(getCountries())
+            .then((data) => {
+                //ordeno lo que tengo cargado en data
+                dispatch(orderBy("asc"));
+                //refresheo el html con la data cargada
+                setCountriesSelected([]);    
+            });
         }
+        
+        //ordeno lo que tengo cargado en data
+        dispatch(orderBy("asc"));
+        //refresheo el html con la data cargada
+        setCountriesSelected([]); 
 
-        if(allCountries.length > 0){
-            dispatch(orderBy("asc"));
-            setCountriesSelected([]);
-        }*/
         
         
-    }, [dispatch/*, allCountries*/]);
+        
+    }, [dispatch]);
 
     return (
         <div className={style.Container}>       

@@ -3,9 +3,8 @@ const axios = require("axios");
 const { Activity, Country } = require("../db");
 const { Op } = require("sequelize");
 const {
-    getCountryByName,
-    getCountryByPk
-    
+  getCountryByName,
+  getCountryByPk, 
 } = require("../utils/serviceCountry");
 
 // Importar todos los routers;
@@ -19,13 +18,14 @@ const router = Router();
 */
 router.get("/countries", async function (req, res){
     
-    const name = req.query.name;
+  const name = req.query.name;
     
-    try {
-      res.status(200).json(await getCountryByName(name));
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  try {
+    res.status(200).json(await getCountryByName(name));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+ 
     
 });
 
@@ -42,7 +42,6 @@ router.get("/countries/:id", async function (req, res){
   }
     
 });
-
 
 
 
